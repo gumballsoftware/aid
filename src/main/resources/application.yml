@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: aid
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  ai:
+  vectorstore:
+    pgvector:
+    index-type: HNSW
+    distance-type: COSINE_DISTANCE
+    dimensions: 1536
+
+ingest:
+    scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json
+    scheduleFileName: schedule.json
+    eventsURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/events.json
+    eventsFileName: events.json
+    speakersURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/speakers.json
+    speakersFileName: speakers.json
