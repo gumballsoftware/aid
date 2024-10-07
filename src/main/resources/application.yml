@@ -6,11 +6,11 @@ spring:
     username: postgres
     password: postgres
   ai:
-  vectorstore:
-    pgvector:
-    index-type: HNSW
-    distance-type: COSINE_DISTANCE
-    dimensions: 1536
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1536
 
 ingest:
     scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json

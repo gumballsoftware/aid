@@ -3,7 +3,6 @@ package org.gumball.ajug.devnexus.aid.service;
 import lombok.RequiredArgsConstructor;
 import org.gumball.ajug.devnexus.aid.config.IngestProperties;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,11 +16,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 @RequiredArgsConstructor
 public class IngestService {
-//    @Value("classpath:/data/Employee_Handbook.pdf")
-//    private Resource pdfResource;
-
-    @Autowired
-    private VectorStore vectorStore;
+    private final VectorStore vectorStore;
 
     private final IngestProperties ingestProperties;
 

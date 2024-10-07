@@ -30,9 +30,7 @@ public class AidApplication implements CommandLineRunner {
     public void run(String... args) throws IOException {
         System.err.println("EXECUTING : command line runner");
         System.err.println(Arrays.toString(OllamaModel.values()));
-        ingestService.download();
-        eventReader.read();
+//        ingestService.download();
+//        eventReader.read();
     }
-
-
 }

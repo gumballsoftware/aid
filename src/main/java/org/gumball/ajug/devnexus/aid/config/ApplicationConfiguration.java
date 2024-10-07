@@ -19,16 +19,5 @@ public class ApplicationConfiguration {
     @Autowired
     IngestProperties ingestProperties;
 
-    @Bean
-    public IngestService ingestService() {
-        return new IngestService(ingestProperties);
-    }
-
-    /*
-    @Bean
-    public VectorStore vectorStore(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
-        return new PgVectorStore(jdbcTemplate, embeddingModel);
-    }
-     */
 }
 

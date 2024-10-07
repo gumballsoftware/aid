@@ -2,6 +2,7 @@ package org.gumball.ajug.devnexus.aid.config;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.gumball.ajug.devnexus.aid.preferences.AppUserPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,21 +11,19 @@ import org.springframework.stereotype.Component;
 import java.nio.file.FileSystems;
 
 @Data
+@Slf4j
 @ConfigurationProperties("ingest")
 public class IngestProperties {
 
     @Autowired
     AppUserPreferences appUserPreferences;
 
-    @Getter
     private String scheduleURL;
     private String scheduleFileName;
 
-    @Getter
     private String eventsURL;
     private String eventsFileName;
 
-    @Getter
     private String speakersURL;
     private String speakersFileName;
 
