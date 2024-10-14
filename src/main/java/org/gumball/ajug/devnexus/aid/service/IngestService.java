@@ -24,8 +24,8 @@ public class IngestService {
         SearchRequest searchRequest = SearchRequest.query("Security AI java").withTopK(5);
         var resp = vectorStore.similaritySearch(searchRequest);
         resp.forEach(document -> {
-                    System.err.println("********* " + document.getMetadata().get("title"));
-                    System.err.println("********* " + document.getMetadata().get("author"));
+                    System.err.println("********* title: " + document.getMetadata().get("title"));
+                    System.err.println("********* room: " + document.getMetadata().get("room"));
                 }
         );
     }
