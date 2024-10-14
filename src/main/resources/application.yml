@@ -1,17 +1,23 @@
 spring:
-  application:
-    name: aid
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
+  application:
+    name: aid
   ai:
     vectorstore:
       pgvector:
         index-type: HNSW
         distance-type: COSINE_DISTANCE
-        dimensions: 1536
-
+        remove-existing-vector-store-table: true
+        initialize-schema: true
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: qwen:7b
+      embedding:
+        model: mixedbread-ai/mxbai-embed-large-v1
 ingest:
     scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json
     scheduleFileName: schedule.json
@@ -19,3 +25,6 @@ ingest:
     eventsFileName: events.json
     speakersURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/speakers.json
     speakersFileName: speakers.json
+logging:
+  level:
+    root: info
