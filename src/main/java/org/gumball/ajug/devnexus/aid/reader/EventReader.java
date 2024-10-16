@@ -26,7 +26,7 @@ public class EventReader {
 
         FileSystemResource file = new FileSystemResource(eventsPath);
 
-        KTMJsonReader loader = new KTMJsonReader(file, eventMetadataGenerator, KEYS);
+        JsonReader loader = new JsonReader(file, eventMetadataGenerator, KEYS);
 
         List<Document> documents = loader.get("/0/sessions");
         return documents;
