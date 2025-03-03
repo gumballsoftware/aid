@@ -2,6 +2,7 @@ Spring AI ETL pipeline for embedding the (2025) DevNexus catalog and then queryi
 session is a document and includes the following metadata:
 * id
 * title
+* description
 * room
 * speakers
 * startsAt
@@ -9,7 +10,7 @@ session is a document and includes the following metadata:
 
 This app uses spring-boot-docker-compose.  Docker images for pgvector and ollama are used.
 
-This app will download the catalog file, ingest it, and then query the top 5 documents to match whatever query
+This app will download the catalog file, ingest it, and then query the top 4 documents to match whatever query
 string the use enters.
 
 Hit 'Enter' twice to exit.
