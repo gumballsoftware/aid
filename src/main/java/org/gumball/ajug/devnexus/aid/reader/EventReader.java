@@ -15,19 +15,20 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class EventReader {
-    private static final String[] KEYS = {"id", "title", "description", "startsAt", "endsAt", "roomId", "room"};
+    private static final String[] KEYS = {"title", "description"};
 
     private final IngestProperties ingestProperties;
 
-    JsonReader reader;
+    private final EventMetadataGenerator eventMetadataGenerator;
 
-    public void read() throws IOException {
+    public List<Document> read() throws IOException {
         String eventsPath = ingestProperties.getEventsFileName();
 
         FileSystemResource file = new FileSystemResource(eventsPath);
 
-        JsonReader loader = new JsonReader(file, KEYS);
-        List<Document> documentList = loader.read();
-        log.error(documentList.toString());
+        JsonReader loader = new JsonReader(file, eventMetadataGenerator, KEYS);
+
+        List<Document> documents = loader.get("/0/sessions");
+        return documents;
     }
 }

@@ -1,16 +1,27 @@
 spring:
-  application:
-    name: aid
+  docker:
+    compose:
+      skip:
+        in-tests: false
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    username: myuser
+    password: secret
+  application:
+    name: aid
   ai:
     vectorstore:
       pgvector:
         index-type: HNSW
         distance-type: COSINE_DISTANCE
-        dimensions: 1536
+        remove-existing-vector-store-table: true
+        initialize-schema: true
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: watt-ai/watt-tool-70B
+      embedding:
+        model: watt-ai/watt-tool-70B
 
 ingest:
     scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json
@@ -19,3 +30,8 @@ ingest:
     eventsFileName: events.json
     speakersURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/speakers.json
     speakersFileName: speakers.json
+logging:
+  level:
+    root: info
+
+
