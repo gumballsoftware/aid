@@ -9,6 +9,7 @@ services:
       - "org.springframework.boot.service-connection=postgres"
     ports:
       - '5432'
+
   ollama:
     image: ollama/ollama:latest
     ports:
@@ -29,3 +30,4 @@ services:
 networks:
   ollama-docker:
     external: false
+

@@ -1,8 +1,12 @@
 spring:
+  docker:
+    compose:
+      skip:
+        in-tests: false
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    username: myuser
+    password: secret
   application:
     name: aid
   ai:
@@ -15,9 +19,10 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: qwen:7b
+        model: watt-ai/watt-tool-70B
       embedding:
-        model: mixedbread-ai/mxbai-embed-large-v1
+        model: watt-ai/watt-tool-70B
+
 ingest:
     scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json
     scheduleFileName: schedule.json
@@ -28,3 +33,5 @@ ingest:
 logging:
   level:
     root: info
+
+

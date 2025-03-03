@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class EventReader {
-    private static final String[] KEYS = {"id", "title", "description", "startsAt", "endsAt", "roomId", "room"};
+    private static final String[] KEYS = {"title", "description"};
 
     private final IngestProperties ingestProperties;
 

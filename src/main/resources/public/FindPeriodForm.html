@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Period Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="number"], select, button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e7f5ff;
+      border-left: 4px solid #007bff;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Find Period</h1>
+  <form id="findPeriodForm">
+    <!-- Example Input Fields -->
+    <div class="form-group">
+      <label for="startDate">Date / Time:</label>
+      <input type="datetime-local" id="startDate" name="startDate" required />
+    </div>
+
+    <button type="button" onclick="callFindPeriod()">Submit</button>
+  </form>
+
+  <div id="result" class="result" style="display: none;">
+    <!-- Results will appear here -->
+  </div>
+</div>
+
+<script>
+  async function callFindPeriod() {
+    // Grab form data
+    const startDate = document.getElementById('startDate').value;
+    const params = new URLSearchParams();
+    params.append("at", startDate);
+
+    // Clear any previous results and show loading message
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<p>Loading...</p>';
+
+    // Example backend endpoint to call (update `/api/findPeriod`)
+    const apiEndpoint = '/api/findPeriod?${params}';
+
+    try {
+      // Call the backend
+      const response = await fetch(`/schedule/period?${params}`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch results from server');
+      }
+
+      // Process response
+      const result = await response.json();
+      renderResult(result);
+    } catch (error) {
+      resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+    }
+  }
+
+  function renderResult(data) {
+    const resultDiv = document.getElementById('result');
+
+    // If no data returned
+    if (!data) {
+      resultDiv.innerHTML = '<p>No data available for the given inputs.</p>';
+      return;
+    }
+
+    // Render the returned data (Assume it's an object or string; update as needed)
+    resultDiv.innerHTML = `
+      <h3>Result:</h3>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    `;
+  }
+</script>
+</body>
+</html>

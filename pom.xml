@@ -16,9 +16,8 @@
 
     <properties>
         <java.version>21</java.version>
-        <spring-ai.version>1.0.0-M3</spring-ai.version>
+        <spring-ai.version>1.0.0-M5</spring-ai.version>
         <org.projectlombok.version>1.18.34</org.projectlombok.version>
-
     </properties>
 
     <repositories>
@@ -43,7 +42,12 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-mcp-server-webmvc-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Query App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .query-form {
+      margin-bottom: 20px;
+    }
+    input[type="text"], button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    input[type="text"] {
+      width: 75%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .result-item {
+      padding: 10px;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      margin-top: 10px;
+      background-color: #f9f9f9;
+    }
+    .result-item h3 {
+      margin: 0 0 10px;
+    }
+    .result-item p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Query App</h1>
+    <!-- Query Input Form -->
+    <form class="query-form">
+      <input type="text" id="queryInput" placeholder="Enter your query..." required />
+      <button type="button" onclick="sendQuery()">Search</button>
+    </form>
+    
+    <!-- Results will be rendered here -->
+    <div id="results" class="results">
+      <p>No results yet. Submit a query above.</p>
+    </div>
+  </div>
+
+  <script>
+    async function sendQuery() {
+      // Get the query from the input
+      const query = document.getElementById('queryInput').value;
+
+      if (!query) {
+        alert('Please enter a query!');
+        return;
+      }
+
+      // Clear old results and display 'loading' message
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '<p>Loading results...</p>';
+
+      try {
+        // Send the query to the backend using Fetch API (update with your backend endpoint)
+        const response = await fetch('/api/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch results. Please try again.');
+        }
+
+        const data = await response.json();
+
+        // Render results
+        renderResults(data);
+      } catch (error) {
+        resultsDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+      }
+    }
+
+    function renderResults(results) {
+      const resultsDiv = document.getElementById('results');
+
+      if (!results || results.length === 0) {
+        resultsDiv.innerHTML = '<p>No results found for your query.</p>';
+        return;
+      }
+
+      // Render each result as a card
+      resultsDiv.innerHTML = results
+        .map(
+          (result) => `
+          <div class="result-item">
+            <h3>${result?.title || 'Untitled'}</h3>
+            <h3>${result?.speakers || 'Untitled'}</h3>
+            <p><strong>Starts At:</strong> ${result?.startsAt || 'N/A'}</p>
+            <p><strong>Room:</strong> ${result?.room || 'N/A'}</p>
+            <p><strong>Score:</strong> ${result?.score || 'N/A'}</p>
+            <p><strong>Description:</strong> ${result?.description || 'No description available.'}</p>
+          </div>
+        `
+        )
+        .join('');
+    }
+  </script>
+</body>
+</html>
