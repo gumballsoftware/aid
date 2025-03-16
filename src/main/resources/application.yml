@@ -22,8 +22,7 @@ spring:
         model: watt-ai/watt-tool-70B
       embedding:
         model: watt-ai/watt-tool-70B
-  main:
-    web-application-type: none
+
 
 ingest:
     scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json

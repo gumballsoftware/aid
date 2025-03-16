@@ -19,7 +19,7 @@ public class QueryController {
 
     @PostMapping("/query")
     public List<ResponseDoc> handleQuery(@RequestBody String request) {
-        List<Document> docs = queryService.query(request, 10);
+        List<Document> docs = queryService.query(request, 5);
         return docs.stream().map(ResponseDoc::new).toList();
     }
 
