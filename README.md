@@ -1,5 +1,5 @@
 Spring AI ETL pipeline for embedding the (2025) DevNexus catalog and then querying same.  Each conference
-session is a document and includes the following metadata:
+session is a document and includes the following:
 * id
 * title
 * description
