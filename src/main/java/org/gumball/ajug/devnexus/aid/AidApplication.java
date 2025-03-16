@@ -46,8 +46,8 @@ public class AidApplication implements CommandLineRunner {
                     System.err.println("********* title: " + document.getMetadata().get("title"));
                     System.err.println("********* description: " + document.getMetadata().get("description"));
                     System.err.println("********* starts: " + document.getMetadata().get("startsAt"));
-//                    System.err.println("********* ends: " + document.getMetadata().get("endsAt"));
-  //                  System.err.println("********* speaker(s): " + document.getMetadata().get("speakers"));
+                    System.err.println("********* ends: " + document.getMetadata().get("endsAt"));
+                    System.err.println("********* speaker(s): " + document.getMetadata().get("speakers"));
                     System.err.println("********* room: " + document.getMetadata().get("room"));
                     System.err.println(" ");
                 }
