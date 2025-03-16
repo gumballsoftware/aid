@@ -19,7 +19,7 @@ public class QueryService {
         SearchRequest searchRequest = SearchRequest.builder()
                 .query(query)
 //                .topK(154)
-                .topK(4)
+                .topK(6)
                 .build();
         var resp = vectorStore.similaritySearch(searchRequest);
         assert resp != null;
