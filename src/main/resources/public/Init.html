@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .query-form {
+      margin-bottom: 20px;
+    }
+    input[type="text"], button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    input[type="text"] {
+      width: 75%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .result-item {
+      padding: 10px;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      margin-top: 10px;
+      background-color: #f9f9f9;
+    }
+    .result-item h3 {
+      margin: 0 0 10px;
+    }
+    .result-item p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Query App</h1>
+  <!-- Query Input Form -->
+  <form class="query-form">
+    <button type="button" onclick="initDownload()">Init</button>
+  </form>
+
+  <!-- Results will be rendered here -->
+  <div id="results" class="results">
+    <p>No results yet. Submit a query above.</p>
+  </div>
+</div>
+
+<script>
+  async function initDownload() {
+
+    try {
+      // Send the query to the backend using Fetch API (update with your backend endpoint)
+      const response = await fetch('/api/ingest', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/text',
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch results. Please try again.');
+      }
+
+      const data = await response;
+
+      // Render results
+      renderResults("OK");
+    } catch (error) {
+      renderResults(error.message);
+    }
+  }
+
+  function renderResults(results) {
+    const resultsDiv = document.getElementById('results');
+
+    if (!results || results.length === 0) {
+      resultsDiv.innerHTML = '<p>No results found for your query.</p>';
+      return;
+    }
+
+    // Render each result as a card
+    resultsDiv.innerHTML = results;
+  }
+</script>
+</body>
+</html>

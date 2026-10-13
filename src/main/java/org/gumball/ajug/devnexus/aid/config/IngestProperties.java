@@ -1,23 +1,13 @@
 package org.gumball.ajug.devnexus.aid.config;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import org.gumball.ajug.devnexus.aid.preferences.AppUserPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.nio.file.FileSystems;
 
-@Data
-@Slf4j
-@ConfigurationProperties("ingest")
+@ConfigurationProperties("ingest-properties")
 public class IngestProperties {
-
-    @Autowired
-    AppUserPreferences appUserPreferences;
-
     private String scheduleURL;
     private String scheduleFileName;
 
@@ -26,6 +16,9 @@ public class IngestProperties {
 
     private String speakersURL;
     private String speakersFileName;
+
+    @Autowired
+    private AppUserPreferences appUserPreferences;
 
     String getFilePrefix() {
         return appUserPreferences.getDownloadDirectory()
@@ -37,4 +30,48 @@ public class IngestProperties {
     public String getEventsFileName() {return getFilePrefix() + eventsFileName;}
 
     public String getSpeakersFileName() {return getFilePrefix() + speakersFileName;}
+
+    public String getScheduleURL() {
+        return scheduleURL;
+    }
+
+    public void setScheduleURL(String scheduleURL) {
+        this.scheduleURL = scheduleURL;
+    }
+
+    public void setScheduleFileName(String scheduleFileName) {
+        this.scheduleFileName = scheduleFileName;
+    }
+
+    public String getEventsURL() {
+        return eventsURL;
+    }
+
+    public void setEventsURL(String eventsURL) {
+        this.eventsURL = eventsURL;
+    }
+
+    public void setEventsFileName(String eventsFileName) {
+        this.eventsFileName = eventsFileName;
+    }
+
+    public String getSpeakersURL() {
+        return speakersURL;
+    }
+
+    public void setSpeakersURL(String speakersURL) {
+        this.speakersURL = speakersURL;
+    }
+
+    public void setSpeakersFileName(String speakersFileName) {
+        this.speakersFileName = speakersFileName;
+    }
+
+    public AppUserPreferences getAppUserPreferences() {
+        return appUserPreferences;
+    }
+
+    public void setAppUserPreferences(AppUserPreferences appUserPreferences) {
+        this.appUserPreferences = appUserPreferences;
+    }
 }

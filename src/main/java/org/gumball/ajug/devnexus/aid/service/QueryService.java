@@ -1,7 +1,5 @@
 package org.gumball.ajug.devnexus.aid.service;
 
-import lombok.extern.slf4j.Slf4j;
-import lombok.RequiredArgsConstructor;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -9,11 +7,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class QueryService {
     private final VectorStore vectorStore;
+
+    public QueryService(VectorStore vectorStore) {
+        this.vectorStore = vectorStore;
+    }
 
     public List<Document> query(String query) {
         SearchRequest searchRequest = SearchRequest.builder()

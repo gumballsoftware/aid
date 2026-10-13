@@ -14,25 +14,24 @@ spring:
       pgvector:
         index-type: HNSW
         distance-type: COSINE_DISTANCE
-        remove-existing-vector-store-table: true
+        remove-existing-vector-store-table: false
         initialize-schema: true
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: watt-ai/watt-tool-70B
+        model: qwen:7b
       embedding:
-        model: watt-ai/watt-tool-70B
+        model: qwen:7b
 
+ingest-properties:
+  schedule-url: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json
+  schedule-fileName: schedule.json
+  eventsURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/events.json
+  eventsFileName: events.json
+  speakersURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/speakers.json
+  speakersFileName: speakers.json
 
-ingest:
-    scheduleURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/schedule.json
-    scheduleFileName: schedule.json
-    eventsURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/events.json
-    eventsFileName: events.json
-    speakersURL: https://raw.githubusercontent.com/gumballsoftware/devnexus-site/master/_data/speakers.json
-    speakersFileName: speakers.json
 logging:
   level:
     root: info
-
 

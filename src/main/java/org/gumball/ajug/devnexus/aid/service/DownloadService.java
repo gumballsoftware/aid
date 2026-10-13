@@ -1,8 +1,7 @@
 package org.gumball.ajug.devnexus.aid.service;
 
-import lombok.RequiredArgsConstructor;
 import org.gumball.ajug.devnexus.aid.config.IngestProperties;
-import org.springframework.ai.vectorstore.VectorStore;
+import org.gumball.ajug.devnexus.aid.preferences.AppUserPreferences;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,10 +13,16 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-@RequiredArgsConstructor
 public class DownloadService {
 
+    private final AppUserPreferences appUserPreferences;
+
     private final IngestProperties ingestProperties;
+
+    public DownloadService(AppUserPreferences appUserPreferences, IngestProperties ingestProperties) {
+        this.appUserPreferences = appUserPreferences;
+        this.ingestProperties = ingestProperties;
+    }
 
     public void download() throws IOException {
         String schedulePath = ingestProperties.getScheduleFileName();
