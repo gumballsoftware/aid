@@ -1,6 +1,5 @@
 package org.gumball.ajug.devnexus.aid.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,8 +9,11 @@ import org.springframework.context.annotation.Configuration;
 })
 public class ApplicationConfiguration {
 
-    @Autowired
-    IngestProperties ingestProperties;
+    private final IngestProperties ingestProperties;
 
+
+    public ApplicationConfiguration(IngestProperties ingestProperties) {
+        this.ingestProperties = ingestProperties;
+    }
 }
 

@@ -2,25 +2,39 @@ package org.gumball.ajug.devnexus.aid.controllers;
 
 import org.gumball.ajug.devnexus.aid.service.QueryService;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.document.DocumentWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-@CrossOrigin // Add this for frontend-backend communication
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class QueryController {
 
     @Autowired
     QueryService queryService;
+    @Autowired
+    private DocumentWriter documentWriter;
+
+    boolean aboveThreshold(Document document) {
+      return (
+                (document != null) &&
+                (document.getScore() != null) &&
+                (document.getScore() > .26)
+        );
+    }
 
     @PostMapping("/query")
     public List<ResponseDoc> handleQuery(@RequestBody String request) {
         List<Document> docs = queryService.query(request, 5);
-        return docs.stream().map(ResponseDoc::new).toList();
+        return docs.stream()
+                .filter(this::aboveThreshold)
+                .map(ResponseDoc::new).toList();
     }
 
     public List<String> docToStringList(Document doc) {
